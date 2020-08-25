@@ -4,9 +4,11 @@
 
 @section('content')
   @include('nav')
-  <div class="container">
-    @foreach($articles as $article)
-      @include('articles.card')       
-    @endforeach
+  <div class="container mt-5">
+    <ol class="review_list">
+      @foreach($articles as $article)
+        @include('articles.card')       
+      @endforeach
+    </ol>
   </div>
 @endsection
