@@ -8,10 +8,11 @@
       <div class="font-weight-lighter">
         {{ $article->created_at->format('Y/m/d H:i') }}
       </div>
-    </div>
-
-  @if( Auth::id() === $article->user_id )
-    <!-- dropdown -->
+      <div class="font-weight-lighter">
+        <img src="{{ asset('storage/image/' . $article->image_path) }}">
+      </div>
+      @if( Auth::id() === $article->user_id )
+      <!-- dropdown -->
       <div class="ml-auto card-text">
         <div class="dropdown">
           <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -31,7 +32,6 @@
         </div>
       </div>
       <!-- dropdown -->
-
       <!-- modal -->
       <div id="modal-delete-{{ $article->id }}" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -56,41 +56,38 @@
         </div>
       </div>
       <!-- modal -->
-    @endif
-
-  </div>
-  <div class="card-body pt-0 pb-2">
-    <h3 class="h4 card-title">
-      <a class="text-dark" href="{{ route('articles.show', ['article' => $article]) }}">
-        {{ $article->title }}
-      </a>
-    </h3>
-    <div class="card-text">
-      {!! nl2br(e( $article->body )) !!}
+      @endif
     </div>
-  </div>
-  <div class="card-body pt-0 pb-2 pl-3">
-    <div class="card-text">
-      <article-like
-        :initial-is-liked-by='@json($article->isLikedBy(Auth::user()))'
-        :initial-count-likes='@json($article->count_likes)'
-        :authorized='@json(Auth::check())'
-        endpoint="{{ route('articles.like', ['article' => $article]) }}"
-      >
-      </article-like>
-    </div>
-  </div>
-  @foreach($article->tags as $tag)
-    @if($loop->first)
-      <div class="card-body pt-0 pb-4 pl-3">
-        <div class="card-text line-height">
-    @endif
-          <a href="{{ route('tags.show', ['name' => $tag->name]) }}" class="border p-1 mr-1 mt-1 text-muted">
-            {{ $tag->hashtag }}
-          </a>
-    @if($loop->last)
-        </div>
+    <div class="card-body pt-0 pb-2">
+      <h3 class="h4 card-title">
+        <a class="text-dark" href="{{ route('articles.show', ['article' => $article]) }}">
+          {{ $article->title }}
+        </a>
+      </h3>
+      <div class="card-text">
+        {!! nl2br(e( $article->body )) !!}
       </div>
+    </div>
+    <div class="card-body pt-0 pb-2 pl-3">
+      <div class="card-text">
+        <article-like :initial-is-liked-by='@json($article->isLikedBy(Auth::user()))'
+          :initial-count-likes='@json($article->count_likes)' :authorized='@json(Auth::check())'
+          endpoint="{{ route('articles.like', ['article' => $article]) }}">
+        </article-like>
+      </div>
+    </div>
+    @foreach($article->tags as $tag)
+    @if($loop->first)
+    <div class="card-body pt-0 pb-4 pl-3">
+      <div class="card-text line-height">
+        @endif
+        <a href="{{ route('tags.show', ['name' => $tag->name]) }}" class="border p-1 mr-1 mt-1 text-muted">
+          {{ $tag->hashtag }}
+        </a>
+        @if($loop->last)
+      </div>
+    </div>
     @endif
-  @endforeach
-</div>
+    @endforeach
+  </div>
+</div>  

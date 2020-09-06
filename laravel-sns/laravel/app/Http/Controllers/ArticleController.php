@@ -38,21 +38,17 @@ class ArticleController extends Controller
     {
         $article->fill($request->all());
         $article->user_id = $request->user()->id;
-        $image = $request->get('image');
-        dd($request->file('image'));
-        if (isset($image)) {
+        if ($request->hasFile('image')) {
             $path = $request->file('image')->store('public/image');
             $article->image_path = basename($path);
-          } else {
-              $article->image_path = null;
-          }
+        } else {
+            $article->image_path = null;
+        }
         $article->save();
-
         $request->tags->each(function ($tagName) use ($article) {
             $tag = Tag::firstOrCreate(['name' => $tagName]);
             $article->tags()->attach($tag);
         });
-
         return redirect()->route('articles.index');
     }
 
