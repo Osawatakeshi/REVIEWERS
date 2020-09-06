@@ -14,7 +14,7 @@
   <!-- Material Design Bootstrap -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.11/css/mdb.min.css" rel="stylesheet">
   <!-- Styles -->
-  <link href="{{ mix('css/app.css') }}" rel="stylesheet" type="text/css">
+  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
 <body>
