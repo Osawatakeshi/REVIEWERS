@@ -1,4 +1,4 @@
-<div class="card mt-3 hoverable">
+<div class="col-md-8 col-md-2 mx-auto hoverable">
   <div class="card-body d-flex flex-row">
     <i class="fas fa-user-circle fa-3x mr-1"></i>
     <div>
@@ -8,7 +8,7 @@
       <div class="font-weight-lighter">
         {{ $article->created_at->format('Y/m/d H:i') }}
       </div>
-      <div class="font-weight-lighter">
+      <div class="card-img-top">
         <img src="{{ asset('storage/image/' . $article->image_path) }}">
       </div>
       @if( Auth::id() === $article->user_id )
@@ -90,4 +90,4 @@
     @endif
     @endforeach
   </div>
-</div>  
+</div>
